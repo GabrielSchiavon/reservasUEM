@@ -1,0 +1,8 @@
+{
+  "name": "reservasUEM",
+  "app_id": "d447267c",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
