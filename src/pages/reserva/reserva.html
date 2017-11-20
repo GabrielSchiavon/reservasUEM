@@ -1,0 +1,64 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Reservas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-icon item-start name="calendar"></ion-icon>
+      <ion-label>Departamento</ion-label>
+      <ion-select>
+        <ion-option>DIN</ion-option>
+        <ion-option>Teste</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-start name="clock"></ion-icon>
+      <ion-label>Horário</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD-MM-YYYY"></ion-datetime>>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid no-padding>
+
+    <ion-row>
+      <ion-col>
+          <button ion-button block><</button>
+      </ion-col>
+      <ion-col>
+          <button ion-button block>Sala 02</button>
+      </ion-col>
+      <ion-col>
+          <button ion-button block>></button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-4  class="centralizaHorizontal">
+        Horário
+      </ion-col>
+
+      <ion-col class="centralizaHorizontal">
+        Detalhes
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-4  class="centralizaHorizontal">
+        <h4>7:45 - 9:20</h4>
+      </ion-col>
+
+      <ion-col>
+        <h4>Disponivel</h4>
+        <p>{{professor}}</p>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

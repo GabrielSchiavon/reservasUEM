@@ -7,10 +7,12 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
+
 import { UsuarioServiceProvider } from '../providers/usuario-service/usuario-service';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
-import { Storage } from '@ionic/storage';
+import { ReservaServiceProvider } from '../providers/reserva-service/reserva-service';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { Storage } from '@ionic/storage';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -32,7 +35,8 @@ import { Storage } from '@ionic/storage';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsuarioServiceProvider,
-    LoginServiceProvider
+    LoginServiceProvider,
+    ReservaServiceProvider
   ]
 })
 export class AppModule {}

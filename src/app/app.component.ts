@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { ListPage } from '../pages/list/list';
+import { Storage } from '@ionic/storage/es2015/storage';
 
 @Component({
   templateUrl: 'app.html'
@@ -11,11 +12,12 @@ import { ListPage } from '../pages/list/list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'LoginPage';
-
+  rootPage: any;
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+    private storage: Storage) {
+    this.verifyConnected();
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -26,6 +28,18 @@ export class MyApp {
 
   }
 
+  async verifyConnected() {
+    await this.storage.get("keepConnected").then( 
+      (value) => {
+        if (value) {
+          this.rootPage = 'ReservaListagemPage';
+        } else {
+          this.rootPage = 'LoginPage'; 
+        }
+      }
+    )
+  }
+  
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

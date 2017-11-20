@@ -1,0 +1,89 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Minhas Reservas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <ion-item-divider>Confirmados</ion-item-divider>
+    <ion-item *ngIf="reservaConfirmadas.length === 0">
+      <h3>Você não possui reservas confirmadas</h3>
+    </ion-item>
+
+    <ion-item class="content1" *ngFor="let reserva of reservaConfirmadas" no-lines>
+      <img item-start src="/assets/imgs/confirmado.jpg" class="redimensionaImg">
+      <ion-card class="removeMargem">
+        <div >
+          <h2 class="alignleft">{{ reserva.nomeMateria }}</h2>
+          <h2 class="alignright">{{ reserva.datareserva }}</h2>
+        </div>
+        <br>
+        <br>
+        <div id="textbox">
+          <h3 class="alignleft">Sala {{ reserva.numero }}</h3> 
+          <h4 class="alignright" *ngIf="reserva.tipoaula == 1">Teórica</h4>
+          <h4 class="alignright" *ngIf="reserva.tipoaula == 2">Prática</h4>
+        </div>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item-divider>Pendentes</ion-item-divider>
+    <ion-item *ngIf="reservaPendentes.length === 0">
+      <h3>Você não possui reservas pendentes</h3>
+    </ion-item>
+
+    <ion-item class="content1" *ngFor="let reserva of reservaPendentes" no-lines>
+      <img item-start src="/assets/imgs/pendente.jpg" class="redimensionaImg">
+      <ion-card class="removeMargem">
+        <div >
+          <h2 class="alignleft">{{ reserva.nomeMateria }}</h2>
+          <h2 class="alignright">{{ reserva.datareserva }}</h2>
+        </div>
+        <br>
+        <br>
+        <div id="textbox">
+          <h3 class="alignleft">Sala {{ reserva.numero }}</h3> 
+          <h4 class="alignright" *ngIf="reserva.tipoaula == 1">Teórica</h4>
+          <h4 class="alignright" *ngIf="reserva.tipoaula == 2">Prática</h4>
+        </div>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item-divider>Finalizado</ion-item-divider>
+    <ion-item *ngIf="reservaFinalizadas.length === 0">
+      <h3>Você não possui reservas finalizadas</h3>
+    </ion-item>
+
+    <ion-item class="content1" *ngFor="let reserva of reservaFinalizadas" no-lines>
+      <img item-start src="/assets/imgs/anterior.jpg" class="redimensionaImg">
+      <ion-card class="removeMargem">
+        <div >
+          <h2 class="alignleft">{{ reserva.nomeMateria }}</h2>
+          <h2 class="alignright">{{ reserva.datareserva }}</h2>
+        </div>
+        <br>
+        <br>
+        <div id="textbox">
+          <h3 class="alignleft">Sala {{ reserva.numero }}</h3> 
+          <h4 class="alignright" *ngIf="reserva.tipoaula == 1">Teórica</h4>
+          <h4 class="alignright" *ngIf="reserva.tipoaula == 2">Prática</h4>
+        </div>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab icon-only>
+      <ion-icon name="clipboard"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

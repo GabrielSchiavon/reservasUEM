@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class LoginServiceProvider {
+export class ReservaServiceProvider {
   baseUri: string;
 
   constructor(public http: Http) {
@@ -11,9 +12,9 @@ export class LoginServiceProvider {
     //this.baseUri = "http://din.uem.br/appsmoveis/webresources/reserva/";
   }
 
-  confirmLogin(email: string, senha: string){
+  loadReservation(idUser: number) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.baseUri+'login/confirmarLogin/'+email+'/'+senha)
+      this.http.get(this.baseUri + 'reserva/carregarReservaPorUsuario/' + idUser.toString())
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
@@ -23,4 +24,5 @@ export class LoginServiceProvider {
         });
     });
   }
+
 }
