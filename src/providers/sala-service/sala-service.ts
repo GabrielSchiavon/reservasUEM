@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
 import { ConexaoProvider } from '../conexao/conexao';
 
 @Injectable()
-export class ReservaServiceProvider extends ConexaoProvider {
+export class SalaServiceProvider extends ConexaoProvider {
 
   constructor(public http: Http) {
     super();
   }
-
-  loadReservation(idUser: number) {
+  
+  loadRoomByDepartament(idDepart: number) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.baseUri + 'reserva/carregarReservaPorUsuario/' + idUser.toString())
+      this.http.get(this.baseUri + 'sala/carregarSalaPorDepartamento/' + idDepart)
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
@@ -24,9 +23,9 @@ export class ReservaServiceProvider extends ConexaoProvider {
     });
   }
 
-  loadReservationToday(day: string, idDepart: number) {
+  loadRoom() {
     return new Promise((resolve, reject) => {
-      this.http.get(this.baseUri+'reserva/carregarReservaPorDia/'+day+'/'+idDepart)
+      this.http.get(this.baseUri + 'sala/carregarSala')
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);

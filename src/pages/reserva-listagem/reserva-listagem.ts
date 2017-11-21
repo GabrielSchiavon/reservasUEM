@@ -2,7 +2,6 @@ import { ReservaUsuario } from './../../models/ReservaUsuario';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Reserva } from '../../models/Reserva';
 import { ReservaServiceProvider } from '../../providers/reserva-service/reserva-service';
 
 @IonicPage()

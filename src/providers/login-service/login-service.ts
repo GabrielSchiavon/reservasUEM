@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { ConexaoProvider } from '../conexao/conexao';
 
 @Injectable()
-export class LoginServiceProvider {
-  baseUri: string;
+export class LoginServiceProvider extends ConexaoProvider {
 
   constructor(public http: Http) {
-    this.baseUri = "http://localhost:8084/AppUemWS/webresources/reserva/";
-    //this.baseUri = "http://din.uem.br/appsmoveis/webresources/reserva/";
+    super();
   }
 
   confirmLogin(email: string, senha: string){

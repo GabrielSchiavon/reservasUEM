@@ -12,16 +12,15 @@
     <ion-item>
       <ion-icon item-start name="calendar"></ion-icon>
       <ion-label>Departamento</ion-label>
-      <ion-select>
-        <ion-option>DIN</ion-option>
-        <ion-option>Teste</ion-option>
+      <ion-select [(ngModel)]="selectedDepartament" (ngModelChange)="refreshReservation()">
+        <ion-option *ngFor="let d of departaments" value="{{ d.id }}"> {{ d.nome }}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-icon item-start name="clock"></ion-icon>
-      <ion-label>Horário</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD-MM-YYYY"></ion-datetime>>
+      <ion-label>Data</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD-MM-YYYY" [(ngModel)]="today" (ngModelChange)="refreshReservation()"></ion-datetime>>
     </ion-item>
   </ion-list>
 
@@ -29,13 +28,17 @@
 
     <ion-row>
       <ion-col>
-          <button ion-button block><</button>
+          <button ion-button block icon-only (click)="backRoom()">
+            <ion-icon name="arrow-dropleft"></ion-icon>
+          </button>
       </ion-col>
       <ion-col>
-          <button ion-button block>Sala 02</button>
+          <button ion-button block [(ngModel)]="selectedRoom" ngDefaultControl>Sala {{ selectedRoom.numero }} </button>
       </ion-col>
       <ion-col>
-          <button ion-button block>></button>
+          <button ion-button block icon-only (click)="nextRoom()">
+            <ion-icon name="arrow-dropright"></ion-icon>
+          </button>
       </ion-col>
     </ion-row>
 

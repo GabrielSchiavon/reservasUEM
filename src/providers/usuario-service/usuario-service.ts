@@ -1,18 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { ConexaoProvider } from '../conexao/conexao';
 
-/*
-  Generated class for the UsuarioServiceProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
-export class UsuarioServiceProvider {
+export class UsuarioServiceProvider extends ConexaoProvider {
 
   constructor(public http: Http) {
-    console.log('Hello UsuarioServiceProvider Provider');
+    super();
   }
 
 }

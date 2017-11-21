@@ -13,6 +13,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { UsuarioServiceProvider } from '../providers/usuario-service/usuario-service';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { ReservaServiceProvider } from '../providers/reserva-service/reserva-service';
+import { DepartamentoServiceProvider } from '../providers/departamento-service/departamento-service';
+import { ConexaoProvider } from '../providers/conexao/conexao';
+import { SalaServiceProvider } from '../providers/sala-service/sala-service';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { ReservaServiceProvider } from '../providers/reserva-service/reserva-ser
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsuarioServiceProvider,
     LoginServiceProvider,
-    ReservaServiceProvider
+    ReservaServiceProvider,
+    DepartamentoServiceProvider,
+    ConexaoProvider,
+    SalaServiceProvider
   ]
 })
 export class AppModule {}

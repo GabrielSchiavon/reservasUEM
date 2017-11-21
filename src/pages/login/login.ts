@@ -29,7 +29,7 @@ export class LoginPage {
     this.loginService.confirmLogin(this.email, this.senha)
       .then( (login: Login) => {
         this.storage.set("login", login);
-        alert("Sucesso");
+        this.navCtrl.setRoot('ReservaPage');
       } )
       .catch( () => "Erro na requisição de login" );
   }

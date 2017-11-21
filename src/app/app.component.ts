@@ -32,7 +32,7 @@ export class MyApp {
     await this.storage.get("keepConnected").then( 
       (value) => {
         if (value) {
-          this.rootPage = 'ReservaListagemPage';
+          this.rootPage = 'ReservaPage';
         } else {
           this.rootPage = 'LoginPage'; 
         }
