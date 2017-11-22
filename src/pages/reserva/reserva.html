@@ -43,7 +43,7 @@
     </ion-row>
 
     <ion-row>
-      <ion-col col-4  class="centralizaHorizontal">
+      <ion-col col-5  class="centralizaHorizontal">
         Horário
       </ion-col>
 
@@ -52,14 +52,14 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col col-4  class="centralizaHorizontal">
-        <h4>7:45 - 9:20</h4>
+    <ion-row *ngFor="let p of periods; let i = index">
+      <ion-col col-5  class="centralizaHorizontal">
+        <h4>{{ p }}</h4>
       </ion-col>
 
       <ion-col>
-        <h4>Disponivel</h4>
-        <p>{{professor}}</p>
+        <h4 *ngIf="isAvaible(i)">Disponivel</h4>
+        <h4 *ngIf="!isAvaible(i)" [(ngModel)]="reservation" ngDefaultControl>{{ reservation.id }}</h4>
       </ion-col>
     </ion-row>
 

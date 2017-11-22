@@ -19,11 +19,14 @@ export class ReservaPage {
   today: string;
   login: Login;
 
+  periods: string[] = ["7:45 - 9:20", "9:40 - 11:20", "13:30 - 15:10", "15:30 - 17:10", "19:30 - 21:10", "21:20 - 23:00"];
+
   selectedDepartament: number;
   departaments: Departamento[] = [];
 
   reservation: Reserva;
   reservations: Reserva[] = [];
+  allReservations: Reserva[] = [];
 
   posRoom: number;
   selectedRoom: Sala;
@@ -37,12 +40,10 @@ export class ReservaPage {
     public salaService: SalaServiceProvider,
     private storage: Storage
   ) {
-
     this.today = new Date().toISOString();
     this.selectedRoom = new Sala();
     this.posRoom = 0;
     this.loadResources();
-    
   }
 
   async loadResources() {
@@ -63,7 +64,10 @@ export class ReservaPage {
       });
 
     await this.reservaService.loadReservationToday(this.today, this.selectedDepartament)
-      .then((value: Reserva[]) => this.reservations = value);
+      .then((value: Reserva[]) => {
+        this.allReservations = value;
+        this.filterReservationsByIdRoom();
+      });
   }
 
   refreshReservation() {
@@ -74,6 +78,22 @@ export class ReservaPage {
       });
   }
 
+  isAvaible(pos: number): boolean {
+    this.reservation = null;
+    
+    for(let r of this.reservations) {
+      if (r.periodo == pos) {
+        this.reservation = r;
+        return false;
+      }
+    }
+    return true;
+  }
+
+  filterReservationsByIdRoom(){
+    this.reservations = this.allReservations.filter(res => res.idsala == this.selectedRoom.id);
+  }
+
   backRoom(){
     if (this.posRoom > 0) {
       this.posRoom -= 1;
@@ -81,6 +101,7 @@ export class ReservaPage {
       this.posRoom = this.rooms.length-1;
     }
     this.selectedRoom = this.rooms[this.posRoom];
+    this.filterReservationsByIdRoom();
   }
 
   nextRoom(){
@@ -90,5 +111,6 @@ export class ReservaPage {
       this.posRoom = 0;
     }
     this.selectedRoom = this.rooms[this.posRoom];
+    this.filterReservationsByIdRoom();
   }
 }
