@@ -24,24 +24,25 @@
     </ion-item>
   </ion-list>
 
-  <ion-grid no-padding>
+  <ion-grid class="btnGrid">
 
     <ion-row>
       <ion-col>
-          <button ion-button block icon-only (click)="backRoom()">
+          <button ion-button block icon-only (click)="backRoom()" class="btnLeft">
             <ion-icon name="arrow-dropleft"></ion-icon>
           </button>
       </ion-col>
-      <ion-col>
-          <button ion-button block [(ngModel)]="selectedRoom" ngDefaultControl>Sala {{ selectedRoom.numero }} </button>
+      <ion-col class="roomNumber">
+        <button ion-button block [(ngModel)]="selectedRoom" ngDefaultControl>Sala {{ selectedRoom.numero }} </button>
       </ion-col>
       <ion-col>
-          <button ion-button block icon-only (click)="nextRoom()">
+          <button ion-button block icon-only (click)="nextRoom()" class="btnRight">
             <ion-icon name="arrow-dropright"></ion-icon>
           </button>
       </ion-col>
     </ion-row>
-
+</ion-grid>
+<ion-grid no-padding class="gridData">
     <ion-row>
       <ion-col col-5  class="centralizaHorizontal">
         Horário
@@ -58,8 +59,13 @@
       </ion-col>
 
       <ion-col>
-        <h4 *ngIf="isAvaible(i)">Disponivel</h4>
-        <h4 *ngIf="!isAvaible(i)" [(ngModel)]="reservation" ngDefaultControl>{{ reservation.id }}</h4>
+        <div *ngIf="isAvaible(i)">
+            Disponivel
+            <button ion-button round small style="float:right; margin-right:5%">Reservar</button>
+        </div>
+        <div *ngIf="!isAvaible(i)">
+          <h4 [(ngModel)]="reservation" ngDefaultControl>{{ reservation.id }}</h4>
+        </div>
       </ion-col>
     </ion-row>
 
