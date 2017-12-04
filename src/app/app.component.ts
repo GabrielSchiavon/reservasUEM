@@ -3,8 +3,8 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { ListPage } from '../pages/list/list';
 import { Storage } from '@ionic/storage';
+import { Login } from '../models/Login';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,7 +23,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: 'UsuarioListagemPage' },
-      { title: 'List', component: 'ListPage' }
+      { title: 'Criar Departamento', component: 'DepartamentCreatePage' }
     ];
 
   }
@@ -32,7 +32,7 @@ export class MyApp {
     await this.storage.get("keepConnected").then( 
       (value) => {
         if (value) {
-          this.rootPage = 'ReservaPage';
+          this.rootPage = 'ReservationCreatePage';
         } else {
           this.rootPage = 'LoginPage'; 
         }
@@ -50,6 +50,7 @@ export class MyApp {
   }
 
   logout() {
+    this.storage.set("login", new Login());
     this.storage.set("keepConnected", false);
     this.nav.setRoot('LoginPage');
   }

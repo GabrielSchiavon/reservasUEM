@@ -1,7 +1,7 @@
 import { LoginServiceProvider } from './../../providers/login-service/login-service';
 import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Login } from '../../models/Login';
 
 @IonicPage()
@@ -14,13 +14,17 @@ export class LoginPage {
   email: string;
   senha: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loginService: LoginServiceProvider,
-    private storage: Storage) {
-      this.storage.get("email").then( (value) => this.email = value );
-      this.storage.get("senha").then( (value) => this.senha = value );
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public loginService: LoginServiceProvider,private storage: Storage, private menuCtrl: MenuController) {
+      this.storage.get("login")
+        .then( (value) => {if (value.id === -1) { this.senha = ''} });
       this.storage.get("keepConnected").then( (value) => this.keepConnected = value );
   }
 
+  ionViewWillEnter(){
+    this.senha = '';
+    this.menuCtrl.enable(false);
+  }
   saveConnected(event) {
     this.storage.set("keepConnected", this.keepConnected);
   }

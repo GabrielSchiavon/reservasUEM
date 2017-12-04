@@ -1,6 +1,6 @@
 import { SalaServiceProvider } from './../../providers/sala-service/sala-service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { Departamento } from '../../models/Departamento';
 import { DepartamentoServiceProvider } from '../../providers/departamento-service/departamento-service';
@@ -38,7 +38,8 @@ export class ReservaPage {
     public departamentoService: DepartamentoServiceProvider,
     public reservaService: ReservaServiceProvider,
     public salaService: SalaServiceProvider,
-    private storage: Storage
+    private storage: Storage,
+    public menuCtrl: MenuController
   ) {
     this.today = new Date().toISOString();
     this.selectedRoom = new Sala();
@@ -68,6 +69,10 @@ export class ReservaPage {
         this.allReservations = value;
         this.filterReservationsByIdRoom();
       });
+
+    if(this.login.id !== -1) {
+      this.menuCtrl.enable(true);
+    }
   }
 
   refreshReservation() {

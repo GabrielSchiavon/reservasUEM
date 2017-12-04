@@ -6,7 +6,6 @@ export class ConexaoProvider {
 
   constructor() {
     this.baseUri = "http://localhost:8084/AppUemWS/webresources/reserva/";
-    //this.baseUri = "http://din.uem.br/appsmoveis/webresources/reserva/";
   }
 
 }
