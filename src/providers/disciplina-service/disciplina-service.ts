@@ -4,15 +4,15 @@ import 'rxjs/add/operator/map';
 import { ConexaoProvider } from '../conexao/conexao';
 
 @Injectable()
-export class UsuarioServiceProvider extends ConexaoProvider {
+export class DisciplinaServiceProvider extends ConexaoProvider{
 
   constructor(public http: Http) {
-    super();
+    super()
   }
 
-  loadUserById(id: number) {
+  loadDisciplineById(id: string) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.baseUri+'usuario/carregarUsuarioPorId/'+id.toString())
+      this.http.get(this.baseUri+'disciplina/carregarDisciplinasPorId/'+id)
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
@@ -23,9 +23,9 @@ export class UsuarioServiceProvider extends ConexaoProvider {
     });
   }
 
-  loadUser() {
+  loadDiscipline() {
     return new Promise((resolve, reject) => {
-      this.http.get(this.baseUri+'usuario/carregarUsuario')
+      this.http.get(this.baseUri+'disciplina/carregarDisciplina')
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
@@ -36,11 +36,11 @@ export class UsuarioServiceProvider extends ConexaoProvider {
     });
   }
 
-  removeUser(encapsulado) {
+  removeDiscipline(encapsulado) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return new Promise((resolve, reject) => {
-      this.http.put(this.baseUri+'usuario/removeUsuario', JSON.stringify(encapsulado),
+      this.http.put(this.baseUri+'disciplina/removeDisciplina', JSON.stringify(encapsulado),
           {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
@@ -52,11 +52,11 @@ export class UsuarioServiceProvider extends ConexaoProvider {
     });
   }
 
-  updateUser(encapsulate) {
+  updateDiscipline(encapsulate) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return new Promise((resolve, reject) => {
-      this.http.put(this.baseUri+'usuario/alterarUsuario', JSON.stringify(encapsulate),
+      this.http.put(this.baseUri+'disciplina/alterarDisciplina', JSON.stringify(encapsulate),
           {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
@@ -68,11 +68,11 @@ export class UsuarioServiceProvider extends ConexaoProvider {
     });
   }
 
-  insertUser(encapsulate) {
+  insertDiscipline(encapsulate) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return new Promise((resolve, reject) => {
-      this.http.post(this.baseUri+'usuario/cadastrarUsuario', JSON.stringify(encapsulate),
+      this.http.post(this.baseUri+'disciplina/cadastrarDisciplina', JSON.stringify(encapsulate),
           {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
@@ -83,4 +83,5 @@ export class UsuarioServiceProvider extends ConexaoProvider {
         });
     });
   }
+
 }

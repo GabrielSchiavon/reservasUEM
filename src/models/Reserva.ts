@@ -32,16 +32,12 @@ export class Reserva {
         this.status = status;
       } else {
         this.id = -1;
-        this.iddepartamento = -1;
+        //this.iddepartamento = 1;
         this.idusuario = -1;
-        this.tipoaula = -1;
-        this.iddisciplina = -1;
         this.tipo = -1;
-        this.dataefetuacao = "00/00/0000";
+        this.dataefetuacao = new Date().toISOString();
         this.proximoid = -1;
-        this.datareserva = "00/00/0000";
-        this.periodo = -1;
-        this.idsala = -1;
+        this.datareserva = new Date().toISOString();
         this.tiposala = -1;
         this.status = 0;
       }

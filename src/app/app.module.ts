@@ -16,6 +16,7 @@ import { ReservaServiceProvider } from '../providers/reserva-service/reserva-ser
 import { DepartamentoServiceProvider } from '../providers/departamento-service/departamento-service';
 import { ConexaoProvider } from '../providers/conexao/conexao';
 import { SalaServiceProvider } from '../providers/sala-service/sala-service';
+import { DisciplinaServiceProvider } from '../providers/disciplina-service/disciplina-service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SalaServiceProvider } from '../providers/sala-service/sala-service';
     ReservaServiceProvider,
     DepartamentoServiceProvider,
     ConexaoProvider,
-    SalaServiceProvider
+    SalaServiceProvider,
+    DisciplinaServiceProvider,
   ]
 })
 export class AppModule {}
