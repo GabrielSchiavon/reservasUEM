@@ -14,6 +14,7 @@ import { SalaServiceProvider } from '../../providers/sala-service/sala-service';
 import { Encapsular } from '../../models/Encapsular';
 
 const DAYS_AHEAD = 21; // 3 semanas a frente --> 21 dias
+const YEAR_AHEAD = 365; // 1 ano a frente --> 365 dias
 
 @IonicPage()
 @Component({
@@ -39,7 +40,7 @@ export class ReservationCreatePage {
   ) {
     this.reservation = this.navParams.get("reservation") || new Reserva();
     this.today = new Date().toISOString();
-    this.threeWeeks = this.setThreeWeeksAhead();
+    this.threeWeeks = this.setDaysAhead(DAYS_AHEAD);
     //this.login = this.navParams.get("login"); //<-- Substituir para login
     this.linkRelationship();
   }
@@ -50,9 +51,9 @@ export class ReservationCreatePage {
     await this.callLoadRoom();
   }
 
-  setThreeWeeksAhead(): string {
+  setDaysAhead(days: number): string {
     let weeksAhead = new Date();
-    weeksAhead.setDate(weeksAhead.getDate() + DAYS_AHEAD);
+    weeksAhead.setDate(weeksAhead.getDate() + days);
     return weeksAhead.toISOString();
   }
 
@@ -100,6 +101,14 @@ export class ReservationCreatePage {
       duration: 1500
     });
     toast.present();
+  }
+
+  checkChosen() {
+    if (this.reservation.tipoaula >= 5) {
+      this.threeWeeks = this.setDaysAhead(YEAR_AHEAD);
+    } else {
+      this.threeWeeks = this.setDaysAhead(DAYS_AHEAD);
+    }
   }
 
   save() {

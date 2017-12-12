@@ -19,14 +19,6 @@
     </ion-item>
 
     <ion-item>
-      <ion-icon name="calendar" item-start></ion-icon>
-      <ion-label floating>Data da Reserva</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" min="{{ today }}" max="{{ threeWeeks }}" [(ngModel)]="reservation.datareserva" doneText="Confirmar"
-        cancelText="Cancelar">
-      </ion-datetime>
-    </ion-item>
-
-    <ion-item>
       <ion-icon name="briefcase" item-start></ion-icon>
       <ion-label floating>Departamento</ion-label>
       <ion-select [(ngModel)]="reservation.iddepartamento" okText="Selecionar" cancelText="Cancelar">
@@ -35,8 +27,30 @@
     </ion-item>
 
     <ion-item>
-      <ion-icon name="bookmarks" item-start></ion-icon>
+      <ion-icon name="bookmark" item-start></ion-icon>
+      <ion-label floating>Tipo de aula</ion-label>
+      <ion-select [(ngModel)]="reservation.tipoaula" okText="Selecionar" cancelText="Cancelar" (ionChange)="checkChosen()">
+        <ion-option value="1"> Teórica </ion-option>
+        <ion-option value="2"> Prática </ion-option>
+        <ion-option value="3"> Mestrado </ion-option>
+        <ion-option value="4"> Especialização </ion-option>
+        <ion-option value="5"> Defesa </ion-option>
+        <ion-option value="6"> Minicurso </ion-option>
+      </ion-select>
+    </ion-item>
 
+    <ion-item>
+      <ion-icon name="calendar" item-start></ion-icon>
+      <ion-label floating>Data da Reserva</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" min="{{ today }}" max="{{ threeWeeks }}" 
+        [(ngModel)]="reservation.datareserva" 
+        doneText="Confirmar"
+        cancelText="Cancelar">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="bookmarks" item-start></ion-icon>
       <ion-label floating>Sala</ion-label>
       <ion-select [(ngModel)]="reservation.idsala" okText="Selecionar" cancelText="Cancelar">
         <ion-option *ngFor="let r of rooms" value="{{ r.id }}"> {{ r.descricao }} {{ r.numero }}</ion-option>
@@ -61,19 +75,6 @@
         <ion-option value="4"> 15:30 - 18:00 </ion-option>
         <ion-option value="5"> 19:30 - 21:10 </ion-option>
         <ion-option value="6"> 21:20 - 23:00 </ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="bookmark" item-start></ion-icon>
-      <ion-label floating>Tipo de aula</ion-label>
-      <ion-select [(ngModel)]="reservation.tipoaula" okText="Selecionar" cancelText="Cancelar">
-        <ion-option value="1"> Prática </ion-option>
-        <ion-option value="2"> Teórica </ion-option>
-        <ion-option value="3"> Mestrado </ion-option>
-        <ion-option value="4"> Especialização </ion-option>
-        <ion-option value="5"> Defesa </ion-option>
-        <ion-option value="6"> Minicurso </ion-option>
       </ion-select>
     </ion-item>
 
