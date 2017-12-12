@@ -21,7 +21,7 @@
     <ion-item>
       <ion-icon name="calendar" item-start></ion-icon>
       <ion-label floating>Data da Reserva</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" min="{{ today }}" max="{{ 2018 }}" [(ngModel)]="reservation.datareserva" doneText="Confirmar"
+      <ion-datetime displayFormat="DD/MM/YYYY" min="{{ today }}" max="{{ threeWeeks }}" [(ngModel)]="reservation.datareserva" doneText="Confirmar"
         cancelText="Cancelar">
       </ion-datetime>
     </ion-item>
@@ -79,6 +79,5 @@
 
     <button ion-button block round (click)="save()">Salvar</button>
   </ion-list>
-
 
 </ion-content>

@@ -1,6 +1,6 @@
 import { ReservaUsuario } from './../../models/ReservaUsuario';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 
 import { ReservaServiceProvider } from '../../providers/reserva-service/reserva-service';
 
@@ -15,11 +15,12 @@ export class ReservaListagemPage {
   reservaPendentes: ReservaUsuario[] = [];
   reservaFinalizadas: ReservaUsuario[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public reservaProvider: ReservaServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    private reservaProvider: ReservaServiceProvider, private actionSheetCtrl: ActionSheetController) {
     this.carregaReserva();
   }
 
-  async carregaReserva() {
+  public async carregaReserva() {
     await this.reservaProvider.loadReservation(1)
       .then ( 
         (data: ReservaUsuario[]) => {
@@ -31,4 +32,30 @@ export class ReservaListagemPage {
         (error) => console.log(error) );
   }
 
+  public exibirActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      //title: "Reserva",
+      enableBackdropDismiss: true,
+      buttons: [
+        {
+          text: 'Cancelar Reserva',
+          role: 'destructive',
+          handler: () => {}
+        },
+        {
+          text: 'Modificar',
+          handler: () => {}
+        },
+        {
+          text: 'Fechar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  public reservationCreate() {
+    this.navCtrl.push('ReservationCreatePage');
+  }
 }

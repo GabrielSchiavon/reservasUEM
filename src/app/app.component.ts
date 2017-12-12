@@ -23,7 +23,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: 'UsuarioListagemPage' },
-      { title: 'Criar Departamento', component: 'DepartamentCreatePage' }
+      { title: 'Criar Departamento', component: 'DepartamentCreatePage' },
+      { title: 'Reservas', component: 'ReservaListagemPage' }
     ];
 
   }
@@ -32,7 +33,7 @@ export class MyApp {
     await this.storage.get("keepConnected").then( 
       (value) => {
         if (value) {
-          this.rootPage = 'ReservationCreatePage';
+          this.rootPage = 'ReservaListagemPage';
         } else {
           this.rootPage = 'LoginPage'; 
         }

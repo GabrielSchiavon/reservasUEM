@@ -15,7 +15,7 @@
       <h3>Você não possui reservas confirmadas</h3>
     </ion-item>
 
-    <ion-item class="content1" *ngFor="let reserva of reservaConfirmadas" no-lines>
+    <button ion-item class="content1" *ngFor="let reserva of reservaConfirmadas" (click)="exibirActionSheet()">
       <img item-start src="/assets/imgs/confirmado.jpg" class="redimensionaImg">
       <ion-card class="removeMargem">
         <div >
@@ -30,7 +30,7 @@
           <h4 class="alignright" *ngIf="reserva.tipoaula == 2">Prática</h4>
         </div>
       </ion-card>
-    </ion-item>
+    </button>
   </ion-list>
 
   <ion-list>
@@ -82,7 +82,7 @@
   </ion-list>
 
   <ion-fab right bottom>
-    <button ion-fab icon-only>
+    <button ion-fab icon-only (click)="reservationCreate()">
       <ion-icon name="clipboard"></ion-icon>
     </button>
   </ion-fab>

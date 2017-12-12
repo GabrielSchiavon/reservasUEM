@@ -8,9 +8,12 @@ import { UsuarioServiceProvider } from './../../providers/usuario-service/usuari
 import { Usuario } from './../../models/Usuario';
 import { Reserva } from './../../models/Reserva';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { ReservaServiceProvider } from '../../providers/reserva-service/reserva-service';
 import { SalaServiceProvider } from '../../providers/sala-service/sala-service';
+import { Encapsular } from '../../models/Encapsular';
+
+const DAYS_AHEAD = 21; // 3 semanas a frente --> 21 dias
 
 @IonicPage()
 @Component({
@@ -18,10 +21,10 @@ import { SalaServiceProvider } from '../../providers/sala-service/sala-service';
   templateUrl: 'reservation-create.html',
 })
 export class ReservationCreatePage {
-
   today: string;
+  threeWeeks: string;
   reservation: Reserva;
-  login: Login = new Login();
+  login: Login = new Login(1, "admin", "", 4);
   user: Usuario = new Usuario();
 
   //Vetores de dados
@@ -32,12 +35,12 @@ export class ReservationCreatePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private userProvider: UsuarioServiceProvider, private departamentProvider: DepartamentoServiceProvider,
     private reservationProvider: ReservaServiceProvider, private disciplineProvider: DisciplinaServiceProvider,
-    private roomProvider: SalaServiceProvider
+    private roomProvider: SalaServiceProvider, private toastCtrl: ToastController
   ) {
     this.reservation = this.navParams.get("reservation") || new Reserva();
     this.today = new Date().toISOString();
-    //this.login = this.navParams.get("login"); <-- Substituir para login
-    this.login.id = 1;
+    this.threeWeeks = this.setThreeWeeksAhead();
+    //this.login = this.navParams.get("login"); //<-- Substituir para login
     this.linkRelationship();
   }
 
@@ -45,6 +48,12 @@ export class ReservationCreatePage {
     await this.callLoadUser();
     await this.callLoadDepartament();
     await this.callLoadRoom();
+  }
+
+  setThreeWeeksAhead(): string {
+    let weeksAhead = new Date();
+    weeksAhead.setDate(weeksAhead.getDate() + DAYS_AHEAD);
+    return weeksAhead.toISOString();
   }
 
   callLoadUser() {
@@ -83,5 +92,27 @@ export class ReservationCreatePage {
       }, (error) => {
         console.log("Ocorreu um erro ao carregar os Departamentos", error);
       })
+  }
+
+  confirmationAlert() {
+    let toast = this.toastCtrl.create({
+      message: 'Operação realizada com sucesso!',
+      duration: 1500
+    });
+    toast.present();
+  }
+
+  save() {
+    let encapsulate = new Encapsular(JSON.stringify(this.login), JSON.stringify(this.reservation), "");
+    console.log(JSON.stringify(encapsulate));
+    this.reservationProvider.insertReservation(encapsulate)
+      .then( (resp) => {
+        if (resp) {
+          this.confirmationAlert();
+          this.navCtrl.pop();
+        }
+      }, (error) => {
+        console.log('Error = '+JSON.stringify(error));
+      });
   }
 }
