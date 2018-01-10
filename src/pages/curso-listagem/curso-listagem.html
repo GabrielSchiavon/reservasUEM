@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Curso</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let c of cursos" (click)="exibirActionSheet(c)">
+      <ion-icon item-start left name="school"></ion-icon>
+      {{ c.nome }}
+      <p *ngIf="c.tipo === 1">Interno</p>
+      <p *ngIf="c.tipo === 2">Externo</p>
+    </button>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab icon-only (click)="cadastrarCurso()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

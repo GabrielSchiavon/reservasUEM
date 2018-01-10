@@ -25,6 +25,7 @@ export class MyApp {
       { title: 'Home', component: 'UsuarioListagemPage' },
       { title: 'Departamentos', component: 'DepartamentoListagemPage' },
       { title: 'Disciplinas', component: 'DisciplinaListagemPage' },
+      { title: 'Cursos', component: 'CursoListagemPage' },
       { title: 'Reservas', component: 'ReservaListagemPage' },
       { title: 'Usuários', component: 'UsuarioListagemPage' },
     ];
