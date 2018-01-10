@@ -7,8 +7,7 @@ import { Encapsular } from '../../models/Encapsular';
 
 import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, ToastController } from 'ionic-angular';
-import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { IonicPage, NavController, NavParams, ActionSheetController, ToastController, AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -35,10 +34,10 @@ export class UsuarioListagemPage {
     private departamentoProvider: DepartamentoServiceProvider
   ) {
     this.buscarDados();
-    this.storage.get("login").then( (value) => this.login = value);
   }
 
   private async buscarDados() {
+    await this.storage.get("login").then( (value) => this.login = value);
     await this.buscarUsuariosAtivos();
     await this.buscarDepartamentos();
   }
@@ -62,7 +61,7 @@ export class UsuarioListagemPage {
       )
   }
 
-  private confirmarExclusão(usuario) {
+  private confirmarExclusao(usuario) {
     this.alertCtrl.create({
       title: 'Confirmar operação',
       subTitle: 'Deseja realmente excluir ' + usuario.nome + '?',
@@ -104,7 +103,7 @@ export class UsuarioListagemPage {
           text: 'Remover Usuario',
           role: 'destructive',
           handler: () => {
-            this.confirmarExclusão(usuario);
+            this.confirmarExclusao(usuario);
           }
         },
         {

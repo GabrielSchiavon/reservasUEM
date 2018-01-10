@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Departamentos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+
+    <button ion-item *ngFor="let d of departamentos" (click)="exibirActionSheet(d)">
+      <ion-icon item-start left name="pricetag"></ion-icon>
+      {{ d.nome }} - {{d.descricao}}
+    </button>
+
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab icon-only (click)="cadastrarDepartamento()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
