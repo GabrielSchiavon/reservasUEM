@@ -26,7 +26,6 @@ export class Usuario {
         this.status = status;
       } else {
         this.id = -1;
-        this.permissao = -1;
       }
   }
 }

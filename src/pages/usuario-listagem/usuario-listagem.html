@@ -15,7 +15,7 @@
       <h3>Não há docentes cadastrados</h3>
     </ion-item>
 
-    <button ion-item *ngFor="let usuario of docentes" (click)="exibirActionSheet()">
+    <button ion-item *ngFor="let usuario of docentes" (click)="exibirActionSheet(usuario)">
       <ion-icon item-start left name="person"></ion-icon>
       <div >
         <div class="alignleft">{{ usuario.nome }}</div>
@@ -34,7 +34,7 @@
       <h3>Não há Administrador de Sala cadastrado</h3>
     </ion-item>
 
-    <button ion-item *ngFor="let usuario of admSala" (click)="exibirActionSheet()">
+    <button ion-item *ngFor="let usuario of admSala" (click)="exibirActionSheet(usuario)">
       <ion-icon item-start left name="person"></ion-icon>
       <div >
         <div class="alignleft">{{ usuario.nome }}</div>
@@ -53,7 +53,7 @@
       <h3>Não há Administrador de Departamento cadastrado</h3>
     </ion-item>
 
-    <button ion-item *ngFor="let usuario of admDpto" (click)="exibirActionSheet()">
+    <button ion-item *ngFor="let usuario of admDpto" (click)="exibirActionSheet(usuario)">
       <ion-icon item-start left name="person"></ion-icon>
       <div >
         <div class="alignleft">{{ usuario.nome }}</div>
@@ -72,7 +72,7 @@
       <h3>Não há Administrador de Sistema cadastrado</h3>
     </ion-item>
 
-    <button ion-item *ngFor="let usuario of admSist" (click)="exibirActionSheet()">
+    <button ion-item *ngFor="let usuario of admSist" (click)="exibirActionSheet(usuario)">
       <ion-icon item-start left name="settings"></ion-icon>
       <div >
         <div class="alignleft">{{ usuario.nome }}</div>
@@ -87,4 +87,9 @@
 
   </ion-list>
 
+  <ion-fab right bottom>
+    <button ion-fab icon-only (click)="cadastrarUsuario()">
+      <ion-icon name="person-add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

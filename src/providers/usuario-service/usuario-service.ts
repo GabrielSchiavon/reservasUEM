@@ -39,6 +39,7 @@ export class UsuarioServiceProvider extends ConexaoProvider {
   removeUser(encapsulado) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
+    
     return new Promise((resolve, reject) => {
       this.http.put(this.baseUri+'usuario/removeUsuario', JSON.stringify(encapsulado),
           {headers: headers})
@@ -55,6 +56,8 @@ export class UsuarioServiceProvider extends ConexaoProvider {
   updateUser(encapsulate) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
+    console.log(JSON.stringify(encapsulate))
+
     return new Promise((resolve, reject) => {
       this.http.put(this.baseUri+'usuario/alterarUsuario', JSON.stringify(encapsulate),
           {headers: headers})
@@ -71,6 +74,7 @@ export class UsuarioServiceProvider extends ConexaoProvider {
   insertUser(encapsulate) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
+    
     return new Promise((resolve, reject) => {
       this.http.post(this.baseUri+'usuario/cadastrarUsuario', JSON.stringify(encapsulate),
           {headers: headers})

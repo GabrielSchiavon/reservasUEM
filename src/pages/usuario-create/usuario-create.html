@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Usuário</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <ion-label floating>Nome</ion-label>
+    <ion-input type='text' [(ngModel)]="usuario.nome"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Departamento</ion-label>
+    <ion-select [(ngModel)]="usuario.id_departamento" okText="Selecionar" cancelText="Cancelar">
+      <ion-option *ngFor="let d of departamentos" value="{{ d.id }}">{{ d.nome }}</ion-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label floating>email</ion-label>
+    <ion-input type="email" [(ngModel)]="usuario.email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Telefone</ion-label>
+    <ion-input type="tel" [(ngModel)]="usuario.telefone"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Permissão</ion-label>
+    <ion-select [(ngModel)]="usuario.permissao" okText="Selecionar" cancelText="Cancelar">
+      <ion-option value="1"> Docente </ion-option>
+      <ion-option value="2"> Administrador de Sala </ion-option>
+      <ion-option value="3"> Administrador de Departamento </ion-option>
+      <ion-option value="4"> Administrador de Sistema </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Problema de Locomoção</ion-label>
+    <ion-toggle [(ngModel)]="usuario.problema_locomocao" (ionChange)="verificarProblemaLocomocao($event)">
+    </ion-toggle>
+  </ion-item>
+
+  <br>
+  <br>
+  <button ion-button block round (click)="salvar()">Salvar</button>
+</ion-content>

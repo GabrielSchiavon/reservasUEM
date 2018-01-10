@@ -45,7 +45,7 @@ export class UsuarioListagemPage {
         )
   }
 
-  public exibirActionSheet() {
+  public exibirActionSheet(usuario: Usuario) {
     let actionSheet = this.actionSheetCtrl.create({
       //title: "Reserva",
       enableBackdropDismiss: true,
@@ -57,7 +57,15 @@ export class UsuarioListagemPage {
         },
         {
           text: 'Modificar',
-          handler: () => {}
+          handler: () => {
+            this.navCtrl.push(
+              'UsuarioCreatePage', 
+              {
+                departamentos: this.departamentos,
+                usuario: usuario
+              }
+            )
+          }
         },
         {
           text: 'Fechar',
@@ -66,5 +74,9 @@ export class UsuarioListagemPage {
       ]
     });
     actionSheet.present();
+  }
+
+  cadastrarUsuario() {
+    this.navCtrl.push('UsuarioCreatePage', {departamentos: this.departamentos, isCadastro: true})
   }
 }
