@@ -1,12 +1,9 @@
+import { Departamento } from './../../models/Departamento';
+import { DepartamentoServiceProvider } from './../../providers/departamento-service/departamento-service';
+import { UsuarioServiceProvider } from './../../providers/usuario-service/usuario-service';
+import { Usuario } from './../../models/Usuario';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the UsuarioListagemPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -15,11 +12,59 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class UsuarioListagemPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  docentes: Usuario[] = [];
+  admSala: Usuario[] = [];
+  admDpto: Usuario[] = [];
+  admSist: Usuario[] = [];
+  departamentos: Departamento[] = [];
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private actionSheetCtrl: ActionSheetController,
+    private usuarioProvider: UsuarioServiceProvider,
+    private departamentoProvider: DepartamentoServiceProvider
+  ) {
+    this.buscarDados();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UsuarioListagemPage');
+  private async buscarDados() {
+    await this.usuarioProvider.loadUser()
+      .then( 
+        (response: Usuario[]) => {
+          this.docentes = response.filter(data => data.permissao === 1);
+          this.admSala = response.filter(data => data.permissao === 2);
+          this.admDpto = response.filter(data => data.permissao === 3);
+          this.admSist = response.filter(data => data.permissao === 4);
+        }
+      )
+    
+      await this.departamentoProvider.loadDepartament()
+        .then(
+          (response: Departamento[]) => this.departamentos = response
+        )
   }
 
+  public exibirActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      //title: "Reserva",
+      enableBackdropDismiss: true,
+      buttons: [
+        {
+          text: 'Remover Usuario',
+          role: 'destructive',
+          handler: () => {}
+        },
+        {
+          text: 'Modificar',
+          handler: () => {}
+        },
+        {
+          text: 'Fechar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 }

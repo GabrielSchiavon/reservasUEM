@@ -3,7 +3,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,8 +19,7 @@ import { DisciplinaServiceProvider } from '../providers/disciplina-service/disci
 
 @NgModule({
   declarations: [
-    MyApp,
-    ListPage
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -31,8 +29,7 @@ import { DisciplinaServiceProvider } from '../providers/disciplina-service/disci
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    ListPage
+    MyApp
   ],
   providers: [
     StatusBar,
@@ -45,6 +42,7 @@ import { DisciplinaServiceProvider } from '../providers/disciplina-service/disci
     ConexaoProvider,
     SalaServiceProvider,
     DisciplinaServiceProvider,
+    UsuarioServiceProvider,
   ]
 })
 export class AppModule {}

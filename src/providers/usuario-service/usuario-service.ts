@@ -1,7 +1,7 @@
+import { ConexaoProvider } from './../conexao/conexao';
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { ConexaoProvider } from '../conexao/conexao';
 
 @Injectable()
 export class UsuarioServiceProvider extends ConexaoProvider {

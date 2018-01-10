@@ -1,18 +1,90 @@
-<!--
-  Generated template for the UsuarioListagemPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>usuarioListagem</ion-title>
+    <ion-title>Usuários</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-list>
+    <ion-item-divider>Docentes</ion-item-divider>
+    <ion-item *ngIf="docentes.length === 0">
+      <h3>Não há docentes cadastrados</h3>
+    </ion-item>
+
+    <button ion-item *ngFor="let usuario of docentes" (click)="exibirActionSheet()">
+      <ion-icon item-start left name="person"></ion-icon>
+      <div >
+        <div class="alignleft">{{ usuario.nome }}</div>
+      </div>
+      <br>
+      <div id="textbox" *ngFor="let d of departamentos">
+        <p class="alignleft" *ngIf="d.id == usuario.id_departamento">
+          {{ d.descricao }}
+        </p>
+      </div>
+    </button>
+
+
+    <ion-item-divider>Administrador de Sala</ion-item-divider>
+    <ion-item *ngIf="admSala.length === 0">
+      <h3>Não há Administrador de Sala cadastrado</h3>
+    </ion-item>
+
+    <button ion-item *ngFor="let usuario of admSala" (click)="exibirActionSheet()">
+      <ion-icon item-start left name="person"></ion-icon>
+      <div >
+        <div class="alignleft">{{ usuario.nome }}</div>
+      </div>
+      <br>
+      <div id="textbox" *ngFor="let d of departamentos">
+        <p class="alignleft" *ngIf="d.id == usuario.id_departamento">
+          {{ d.descricao }}
+        </p>
+      </div>
+    </button>
+
+
+    <ion-item-divider>Administrador de Departamento</ion-item-divider>
+    <ion-item *ngIf="admDpto.length === 0">
+      <h3>Não há Administrador de Departamento cadastrado</h3>
+    </ion-item>
+
+    <button ion-item *ngFor="let usuario of admDpto" (click)="exibirActionSheet()">
+      <ion-icon item-start left name="person"></ion-icon>
+      <div >
+        <div class="alignleft">{{ usuario.nome }}</div>
+      </div>
+      <br>
+      <div id="textbox" *ngFor="let d of departamentos">
+        <p class="alignleft" *ngIf="d.id == usuario.id_departamento">
+          {{ d.descricao }}
+        </p>
+      </div>
+    </button>
+
+
+    <ion-item-divider>Administrador de Sistema</ion-item-divider>
+    <ion-item *ngIf="admSist.length === 0">
+      <h3>Não há Administrador de Sistema cadastrado</h3>
+    </ion-item>
+
+    <button ion-item *ngFor="let usuario of admSist" (click)="exibirActionSheet()">
+      <ion-icon item-start left name="settings"></ion-icon>
+      <div >
+        <div class="alignleft">{{ usuario.nome }}</div>
+      </div>
+      <br>
+      <div id="textbox" *ngFor="let d of departamentos">
+        <p class="alignleft" *ngIf="d.id == usuario.id_departamento">
+          {{ d.descricao }}
+        </p>
+      </div>
+    </button>
+
+  </ion-list>
 
 </ion-content>

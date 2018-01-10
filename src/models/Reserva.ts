@@ -32,7 +32,6 @@ export class Reserva {
         this.status = status;
       } else {
         this.id = -1;
-        //this.iddepartamento = 1;
         this.idusuario = -1;
         this.tipoaula = 1;
         this.tipo = -1;

@@ -24,7 +24,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: 'UsuarioListagemPage' },
       { title: 'Criar Departamento', component: 'DepartamentCreatePage' },
-      { title: 'Reservas', component: 'ReservaListagemPage' }
+      { title: 'Reservas', component: 'ReservaListagemPage' },
+      { title: 'Usuários', component: 'UsuarioListagemPage' },
     ];
 
   }
