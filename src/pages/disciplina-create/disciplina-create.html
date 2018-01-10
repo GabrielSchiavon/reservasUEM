@@ -1,0 +1,58 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Disciplina</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <ion-label floating>Nome</ion-label>
+    <ion-input [(ngModel)]="disciplina.nome" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Departamento</ion-label>
+    <ion-select [(ngModel)]="disciplina.id_departamento" okText="Selecionar" cancelText="Cancelar">
+      <ion-option *ngFor="let d of departamentos"  value="{{ d.id }}"> {{ d.nome }} </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Curso</ion-label>
+    <ion-select [(ngModel)]="disciplina.id_curso" okText="Selecionar" cancelText="Cancelar">
+      <ion-option *ngFor="let c of cursos" value="{{ c.id }}"> {{ c.nome }} </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Código da Disciplina</ion-label>
+    <ion-input [(ngModel)]="disciplina.codigo" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Período</ion-label>
+    <ion-select [(ngModel)]="disciplina.periodo" okText="Selecionar" cancelText="Cancelar">
+      <ion-option value="0"> Anual </ion-option>
+      <ion-option value="1"> Primeiro Semestre </ion-option>
+      <ion-option value="2"> Segundo Semestre </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Código da Turma</ion-label>
+    <ion-input [(ngModel)]="disciplina.turma" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Tipo de Aula</ion-label>
+    <ion-select [(ngModel)]="disciplina.classificacao" okText="Selecionar" cancelText="Cancelar">
+      <ion-option value="1"> Teórica </ion-option>
+      <ion-option value="2"> Prática </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <button ion-button block round (click)="salvar()">Salvar</button>
+</ion-content>

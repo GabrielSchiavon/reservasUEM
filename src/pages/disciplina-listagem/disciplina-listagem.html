@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Disciplinas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <button ion-item *ngFor="let d of disciplinas" (click)="exibirActionSheet(d)">
+      <ion-icon item-start left name="book"></ion-icon>
+      {{ d.nome }} - {{ d.codigo }}
+      <p>Turma {{ d.turma }}</p>
+    </button>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab icon-only (click)="cadastrarDisciplina()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>

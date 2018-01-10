@@ -1,30 +1,37 @@
 import { Encapsular } from './../../models/Encapsular';
+import { DisciplinaServiceProvider } from './../../providers/disciplina-service/disciplina-service';
+import { Disciplina } from './../../models/Disciplina';
+import { Curso } from './../../models/Curso';
 import { Departamento } from './../../models/Departamento';
-import { DepartamentoServiceProvider } from './../../providers/departamento-service/departamento-service';
 import { Login } from './../../models/Login';
+
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-departamento-create',
-  templateUrl: 'departamento-create.html',
+  selector: 'page-disciplina-create',
+  templateUrl: 'disciplina-create.html',
 })
-export class DepartamentoCreatePage {
+export class DisciplinaCreatePage {
 
   login: Login;
   isCadastro: boolean;
-  departamento: Departamento;
+  disciplina: Disciplina;
+  departamentos: Departamento[];
+  cursos: Curso[];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private toastCtrl: ToastController,
-    private departamentoProvider: DepartamentoServiceProvider
+    private disciplinaProvider: DisciplinaServiceProvider
   ) {
+    this.disciplina = this.navParams.get("disciplina") || new Disciplina();
+    this.departamentos = this.navParams.get("departamentos") || [];
+    this.cursos = this.navParams.get("cursos");
     this.isCadastro = this.navParams.get("isCadastro") || false;
-    this.login = this.navParams.get("login") || new Login();
-    this.departamento = this.navParams.get("departamento") || new Departamento();
+    this.login = this.navParams.get("login");
   }
 
   exibirMensagem(mensagem: string) {
@@ -37,8 +44,8 @@ export class DepartamentoCreatePage {
 
   salvar() {
     if (this.isCadastro) { //se for cadastro
-      let encapsular = new Encapsular(JSON.stringify(this.login), JSON.stringify(this.departamento), "");
-      this.departamentoProvider.insertDepartament(encapsular)
+      let encapsular = new Encapsular(JSON.stringify(this.login), JSON.stringify(this.disciplina), "");
+      this.disciplinaProvider.insertDiscipline(encapsular)
         .then( (resp) => {
           if (resp === 1) {
             this.exibirMensagem('Operação realizada com sucesso!');
@@ -51,8 +58,8 @@ export class DepartamentoCreatePage {
         });
     } 
     else { //senão, é atualizacao
-      let encapsular = new Encapsular(JSON.stringify(this.login), JSON.stringify(this.departamento), "");
-      this.departamentoProvider.updateDepartament(encapsular)
+      let encapsular = new Encapsular(JSON.stringify(this.login), JSON.stringify(this.disciplina), "");
+      this.disciplinaProvider.updateDiscipline(encapsular)
         .then( (resp) => {
           if (resp === 1) {
             this.exibirMensagem('Operação realizada com sucesso!');
