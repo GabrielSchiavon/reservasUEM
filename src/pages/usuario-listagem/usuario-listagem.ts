@@ -2,8 +2,13 @@ import { Departamento } from './../../models/Departamento';
 import { DepartamentoServiceProvider } from './../../providers/departamento-service/departamento-service';
 import { UsuarioServiceProvider } from './../../providers/usuario-service/usuario-service';
 import { Usuario } from './../../models/Usuario';
+import { Login } from '../../models/Login';
+import { Encapsular } from '../../models/Encapsular';
+
+import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, ToastController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 @IonicPage()
 @Component({
@@ -12,6 +17,7 @@ import { IonicPage, NavController, NavParams, ActionSheetController } from 'ioni
 })
 export class UsuarioListagemPage {
 
+  login: Login;
   docentes: Usuario[] = [];
   admSala: Usuario[] = [];
   admDpto: Usuario[] = [];
@@ -21,15 +27,24 @@ export class UsuarioListagemPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
+    private storage: Storage,
+    private alertCtrl: AlertController,
     private actionSheetCtrl: ActionSheetController,
+    private toastCtrl: ToastController,
     private usuarioProvider: UsuarioServiceProvider,
     private departamentoProvider: DepartamentoServiceProvider
   ) {
     this.buscarDados();
+    this.storage.get("login").then( (value) => this.login = value);
   }
 
   private async buscarDados() {
-    await this.usuarioProvider.loadUser()
+    await this.buscarUsuariosAtivos();
+    await this.buscarDepartamentos();
+  }
+
+  private buscarUsuariosAtivos() {
+    this.usuarioProvider.loadUser()
       .then( 
         (response: Usuario[]) => {
           this.docentes = response.filter(data => data.permissao === 1);
@@ -38,11 +53,46 @@ export class UsuarioListagemPage {
           this.admSist = response.filter(data => data.permissao === 4);
         }
       )
-    
-      await this.departamentoProvider.loadDepartament()
-        .then(
-          (response: Departamento[]) => this.departamentos = response
-        )
+  }
+
+  private buscarDepartamentos() {
+    this.departamentoProvider.loadDepartament()
+      .then(
+        (response: Departamento[]) => this.departamentos = response
+      )
+  }
+
+  private confirmarExclusão(usuario) {
+    this.alertCtrl.create({
+      title: 'Confirmar operação',
+      subTitle: 'Deseja realmente excluir ' + usuario.nome + '?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {}
+        },
+        {
+          text: 'Confirmar',
+          handler: data => {
+            let encapsular = new Encapsular(JSON.stringify(this.login), JSON.stringify(usuario), "");
+            this.usuarioProvider.removeUser(encapsular)
+              .then( (response) => {
+                if (response === 1) {
+                  this.buscarUsuariosAtivos();
+                  this.exibirMensagem('Usuario removido com sucesso');
+                }
+              })
+          }
+        }
+      ]
+    }).present();
+  }
+
+  exibirMensagem(mensagem: string) {
+    this.toastCtrl.create({
+      message: mensagem,
+      duration: 1500
+    }).present();
   }
 
   public exibirActionSheet(usuario: Usuario) {
@@ -53,7 +103,9 @@ export class UsuarioListagemPage {
         {
           text: 'Remover Usuario',
           role: 'destructive',
-          handler: () => {}
+          handler: () => {
+            this.confirmarExclusão(usuario);
+          }
         },
         {
           text: 'Modificar',
@@ -61,6 +113,7 @@ export class UsuarioListagemPage {
             this.navCtrl.push(
               'UsuarioCreatePage', 
               {
+                login: this.login,
                 departamentos: this.departamentos,
                 usuario: usuario
               }
@@ -77,6 +130,12 @@ export class UsuarioListagemPage {
   }
 
   cadastrarUsuario() {
-    this.navCtrl.push('UsuarioCreatePage', {departamentos: this.departamentos, isCadastro: true})
+    this.navCtrl.push(
+      'UsuarioCreatePage', 
+      {
+        login: this.login, 
+        departamentos: this.departamentos, 
+        isCadastro: true
+      });
   }
 }

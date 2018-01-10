@@ -5,7 +5,6 @@ import { Departamento } from '../../models/Departamento';
 import { Encapsular } from '../../models/Encapsular';
 
 import { Component } from '@angular/core';
-import { Storage } from '@ionic/storage';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
@@ -24,14 +23,13 @@ export class UsuarioCreatePage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private storage: Storage,
     private usuarioProvider: UsuarioServiceProvider,
     private toastCtrl: ToastController
   ) {
     this.departamentos = this.navParams.get("departamentos") || [];
     this.usuario = this.navParams.get("usuario") || new Usuario();
     this.isCadastro = this.navParams.get("isCadastro") || false;
-    this.storage.get("login").then( (value) => this.login = value);
+    this.login = this.navParams.get("login") || new Login();
   }
 
   verificarProblemaLocomocao(ev) {
