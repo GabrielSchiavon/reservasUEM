@@ -1,17 +1,17 @@
 export class Sala {
   id: number;
   numero: number;
-  iddepartamento: number;
+  id_departamento: number;
   classificacao: number;
   descricao: string;
   status: number;
 
-  constructor(id?: number, numero?: number, iddepartamento?: number,
+  constructor(id?: number, numero?: number, id_departamento?: number,
     classificacao?: number, descricao?: string, status?: number) {
       if (id) {
         this.id = id;
         this.numero = numero;
-        this.iddepartamento = iddepartamento;
+        this.id_departamento = id_departamento;
         this.classificacao = classificacao;
         this.descricao = descricao;
         this.status = status;

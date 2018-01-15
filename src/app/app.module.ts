@@ -47,6 +47,7 @@ import { AnoLetivoServiceProvider } from '../providers/ano-letivo-service/ano-le
     UsuarioServiceProvider,
     CursoServiceProvider,
     AnoLetivoServiceProvider,
+    SalaServiceProvider,
   ]
 })
 export class AppModule {}

@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Salas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <button ion-item *ngFor="let sala of salas" (click)="exibirActionSheet(sala)">
+      <ion-icon item-start left name="school"></ion-icon>
+      Sala {{ sala.numero }}
+    </button>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab icon-only (click)="cadastrarSala()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

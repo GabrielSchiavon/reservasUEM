@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Sala</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <ion-label floating>Número</ion-label>
+    <ion-input [(ngModel)]="sala.numero" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Departamento</ion-label>
+    <ion-select [(ngModel)]="sala.id_departamento" okText="Selecionar" cancelText="Cancelar">
+      <ion-option *ngFor="let d of departamentos" value="{{ d.id }}"> {{ d.nome }} </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>classificação</ion-label>
+    <ion-select [(ngModel)]="sala.classificacao" okText="Selecionar" cancelText="Cancelar">
+      <ion-option value="1"> Laboratório </ion-option>
+      <ion-option value="2"> Sala de projeção </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Descrição</ion-label>
+    <ion-input [(ngModel)]="sala.descricao"></ion-input>
+  </ion-item>
+
+  <button ion-button block round (click)="salvar()">Salvar</button>
+</ion-content>
