@@ -17,6 +17,7 @@ import { ConexaoProvider } from '../providers/conexao/conexao';
 import { SalaServiceProvider } from '../providers/sala-service/sala-service';
 import { DisciplinaServiceProvider } from '../providers/disciplina-service/disciplina-service';
 import { CursoServiceProvider } from '../providers/curso-service/curso-service';
+import { AnoLetivoServiceProvider } from '../providers/ano-letivo-service/ano-letivo-service';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { CursoServiceProvider } from '../providers/curso-service/curso-service';
     DisciplinaServiceProvider,
     UsuarioServiceProvider,
     CursoServiceProvider,
+    AnoLetivoServiceProvider,
   ]
 })
 export class AppModule {}

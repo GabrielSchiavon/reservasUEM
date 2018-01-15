@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Ano Letivo Listagem</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let ano of anosLetivos" (click)="exibirActionSheet(ano)">
+      <ion-icon item-start left name="calendar"></ion-icon>
+      {{ ano.id }}
+    </button>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab icon-only (click)="cadastrarAnoLetivo()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

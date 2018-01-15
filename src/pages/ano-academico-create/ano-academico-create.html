@@ -1,0 +1,38 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Ano Letivo</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <ion-label floating>Departamento</ion-label>
+    <ion-select [(ngModel)]="anoLetivo.iddepartamento" okText="Selecionar" cancelText="Cancelar">
+      <ion-option *ngFor="let d of departamentos" value="{{ d.id }}"> {{ d.nome }} </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Início Primeiro Semestre</ion-label>
+    <ion-datetime displayFormat= "DD/MM/YYYY" [(ngModel)]="anoLetivo.iniciop" (ngModelChange)="anoLetivo.iniciop = changeDateToString($event)"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Fim Primeiro Semestre</ion-label>
+    <ion-datetime displayFormat= "DD/MM/YYYY" [(ngModel)]="anoLetivo.fimp" (ngModelChange)="anoLetivo.fimp = changeDateToString($event)"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Inicio Segundo Semestre</ion-label>
+    <ion-datetime displayFormat= "DD/MM/YYYY" [(ngModel)]="anoLetivo.inicios" (ngModelChange)="anoLetivo.inicios = changeDateToString($event)"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Fim Segundo Semestre</ion-label>
+    <ion-datetime displayFormat= "DD/MM/YYYY" [(ngModel)]="anoLetivo.fims" (ngModelChange)="anoLetivo.fims = changeDateToString($event)"></ion-datetime>
+  </ion-item>
+  <button ion-button block round (click)="salvar()">Salvar</button>
+</ion-content>

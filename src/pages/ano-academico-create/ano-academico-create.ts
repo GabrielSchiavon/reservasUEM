@@ -1,36 +1,35 @@
-import { DepartamentoServiceProvider } from './../../providers/departamento-service/departamento-service';
-import { Curso } from './../../models/Curso';
+import { AnoLetivoServiceProvider } from './../../providers/ano-letivo-service/ano-letivo-service';
+import { AnoLetivo } from './../../models/AnoLetivo';
 import { Departamento } from './../../models/Departamento';
 import { Login } from './../../models/Login';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { CursoServiceProvider } from '../../providers/curso-service/curso-service';
 import { Encapsular } from '../../models/Encapsular';
 
 @IonicPage()
 @Component({
-  selector: 'page-curso-create',
-  templateUrl: 'curso-create.html',
+  selector: 'page-ano-academico-create',
+  templateUrl: 'ano-academico-create.html',
 })
-export class CursoCreatePage {
+export class AnoAcademicoCreatePage {
 
   login: Login;
   isCadastro: boolean;
   departamentos: Departamento;
-  curso: Curso;
-
+  anoLetivo: AnoLetivo;
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private toastCtrl: ToastController,
-    private cursoProvider: CursoServiceProvider,
+    private anoLetivoProvider: AnoLetivoServiceProvider
   ) {
     this.isCadastro = this.navParams.get("isCadastro") || false;
     this.login = this.navParams.get("login") || new Login();
     this.departamentos = this.navParams.get("departamentos") || new Departamento();
-    this.curso = this.navParams.get("curso") || new Curso();
+    this.anoLetivo = this.navParams.get("anoLetivo") || new AnoLetivo();
   }
-
+  
   exibirMensagem(mensagem: string) {
     let toast = this.toastCtrl.create({
       message: mensagem,
@@ -39,10 +38,14 @@ export class CursoCreatePage {
     toast.present();
   }
 
+  changeDateToString(value: any): string {
+    return value.year.toString() + '-' + value.month.toString() + '-' + value.day.toString();
+  }
+
   salvar() {
     if (this.isCadastro) { //se for cadastro
-      let encapsular = new Encapsular(JSON.stringify(this.login), JSON.stringify(this.curso), "");
-      this.cursoProvider.insertCourse(encapsular)
+      let encapsular = new Encapsular(JSON.stringify(this.login), JSON.stringify(this.anoLetivo), "");
+      this.anoLetivoProvider.insertAcademicYear(encapsular)
         .then( (resp) => {
           if (resp === 1) {
             this.exibirMensagem('Operação realizada com sucesso!');
@@ -55,8 +58,8 @@ export class CursoCreatePage {
         });
     } 
     else { //senão, é atualizacao
-      let encapsular = new Encapsular(JSON.stringify(this.login), JSON.stringify(this.curso), "");
-      this.cursoProvider.updateCourse(encapsular)
+      let encapsular = new Encapsular(JSON.stringify(this.login), JSON.stringify(this.anoLetivo), "");
+      this.anoLetivoProvider.updateAcademicYear(encapsular)
         .then( (resp) => {
           if (resp === 1) {
             this.exibirMensagem('Operação realizada com sucesso!');
