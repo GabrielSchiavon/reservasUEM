@@ -9,7 +9,6 @@
 
 <ion-content>
 
-
   <ion-list>
 
     <ion-item>
@@ -52,7 +51,7 @@
     <ion-item>
       <ion-icon name="bookmarks" item-start></ion-icon>
       <ion-label floating>Sala</ion-label>
-      <ion-select [(ngModel)]="reservation.idsala" okText="Selecionar" cancelText="Cancelar">
+      <ion-select [(ngModel)]="reservation.idsala" okText="Selecionar" cancelText="Cancelar" (ionChange)="mudaTipoSala()">
         <ion-option *ngFor="let r of rooms" value="{{ r.id }}"> {{ r.descricao }} {{ r.numero }}</ion-option>
       </ion-select>
     </ion-item>

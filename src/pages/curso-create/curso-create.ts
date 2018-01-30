@@ -1,9 +1,8 @@
-import { DepartamentoServiceProvider } from './../../providers/departamento-service/departamento-service';
 import { Curso } from './../../models/Curso';
 import { Departamento } from './../../models/Departamento';
 import { Login } from './../../models/Login';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, MenuController } from 'ionic-angular';
 import { CursoServiceProvider } from '../../providers/curso-service/curso-service';
 import { Encapsular } from '../../models/Encapsular';
 
@@ -24,6 +23,7 @@ export class CursoCreatePage {
     public navParams: NavParams,
     private toastCtrl: ToastController,
     private cursoProvider: CursoServiceProvider,
+    private menuCtrl: MenuController
   ) {
     this.isCadastro = this.navParams.get("isCadastro") || false;
     this.login = this.navParams.get("login") || new Login();
@@ -31,6 +31,14 @@ export class CursoCreatePage {
     this.curso = this.navParams.get("curso") || new Curso();
   }
 
+  ionViewCanEnter(){
+    this.menuCtrl.enable(false);
+   }
+ 
+   ionViewCanLeave(){
+    this.menuCtrl.enable(true);
+   }
+ 
   exibirMensagem(mensagem: string) {
     let toast = this.toastCtrl.create({
       message: mensagem,

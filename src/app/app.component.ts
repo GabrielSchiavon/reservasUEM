@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -12,15 +12,21 @@ import { Login } from '../models/Login';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any;
-  pages: Array<{title: string, component: any}>;
+  login: Login = new Login();
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-    private storage: Storage) {
+  rootPage: any;
+  pages: Array<{ title: string, component: any }>;
+
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    private storage: Storage, 
+    private menuCtrl: MenuController
+  ) {
     this.verifyConnected();
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: 'ReservaPage' },
       { title: 'Ano Acadêmico', component: 'AnoAcademicoListagemPage' },
@@ -34,18 +40,22 @@ export class MyApp {
 
   }
 
-  async verifyConnected() {
-    await this.storage.get("keepConnected").then( 
-      (value) => {
-        if (value) {
-          this.rootPage = 'ReservaListagemPage';
-        } else {
-          this.rootPage = 'LoginPage'; 
-        }
-      }
-    )
+  ionViewWillLeave(){
+    this.storage.get("login").then( (login: Login) => {this.login = login} );
   }
-  
+
+  async verifyConnected() {
+    await this.storage.get("login")
+      .then((value) => {
+          if (value) {
+            this.rootPage = 'ReservaListagemPage';
+          } else {
+            this.rootPage = 'ReservaPage';
+          }
+        }
+      )
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -56,10 +66,15 @@ export class MyApp {
   }
 
   logout() {
+    this.menuCtrl.enable(false);
     this.storage.set("login", new Login());
     this.storage.set("keepConnected", false);
-    this.nav.setRoot('LoginPage');
+    this.nav.setRoot('ReservaPage');
   }
+
+//  pushPage(page) {
+//    this.nav.push(page);
+//  }
 
   openPage(page) {
     // Reset the content nav to have just this page

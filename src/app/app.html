@@ -24,5 +24,37 @@
 
 </ion-menu>
 
+<!--<ion-menu [content]="content" id="1">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-item color="primary" no-lines>
+        <ion-avatar item-start>
+          <img src="assets/imgs/semPerfil.png">
+        </ion-avatar>
+        <h1>Reserva de Sala</h1>
+        Olá, Nome Professor
+      </ion-item>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item (click)="openPage('ReservaPage',1)">
+        Consultar Disponibilidade
+      </button>
+      <button menuClose ion-item *ngIf="login.permissao >= 2" (click)="pushPage('ReservationCreatePage',1)">
+        Solicitar Reservas
+      </button>
+      <button menuClose ion-item (click)="openPage('ReservaListagemPage',1)">
+        Minhas Reservas
+      </button>
+      <button menuClose ion-item (click)="logout()">
+        Logout
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>-->
+
+
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

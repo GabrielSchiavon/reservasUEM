@@ -34,7 +34,7 @@ export class Reserva {
         this.id = -1;
         this.idusuario = -1;
         this.tipoaula = 1;
-        this.tipo = -1;
+        this.tipo = 1;
         this.dataefetuacao = new Date().toISOString();
         this.proximoid = -1;
         this.datareserva = new Date().toISOString();

@@ -1,17 +1,17 @@
 export class Curso {
   id: number;
-  IdDepartamento: number;
+  id_departamento: number;
   nome: string;
   tipo: number;
   descricao: string;
   status: number;
 
-  constructor(idCurso?: number, idDepartCurso?: number, nomeCurso?: string,
+  constructor(idCurso?: number, id_departamento?: number, nomeCurso?: string,
     tipoCurso?: number, descricaoCourse?: string, statusCurso?: number) {
 
       if (idCurso) {
         this.id = idCurso;
-        this.IdDepartamento = idDepartCurso;
+        this.id_departamento = id_departamento;
         this.nome = nomeCurso;
         this.tipo = tipoCurso;
         this.descricao = descricaoCourse;

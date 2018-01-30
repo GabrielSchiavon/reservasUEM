@@ -1,11 +1,12 @@
-import { SalaServiceProvider } from './../../providers/sala-service/sala-service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
-import { Departamento } from '../../models/Departamento';
+import { SalaServiceProvider } from './../../providers/sala-service/sala-service';
 import { DepartamentoServiceProvider } from '../../providers/departamento-service/departamento-service';
-import { Reserva } from '../../models/Reserva';
 import { ReservaServiceProvider } from '../../providers/reserva-service/reserva-service';
+
+import { Departamento } from '../../models/Departamento';
+import { Reserva } from '../../models/Reserva';
 import { Login } from '../../models/Login';
 import { Storage } from '@ionic/storage';
 import { Sala } from '../../models/Sala';
@@ -17,7 +18,7 @@ import { Sala } from '../../models/Sala';
 })
 export class ReservaPage {
   today: string;
-  login: Login;
+  login: Login = new Login();
 
   periods: string[] = ["7:45 - 9:20", "9:40 - 11:20", "13:30 - 15:10", "15:30 - 17:10", "19:30 - 21:10", "21:20 - 23:00"];
 
@@ -49,7 +50,13 @@ export class ReservaPage {
 
   async loadResources() {
     await this.storage.get("login")
-      .then((login) => this.login = login);
+      .then((login) => {
+        if (login) {
+          this.login = login
+        } else {
+          this.login = new Login();
+        }
+      });
 
     await this.departamentoService.loadDepartament()
       .then((value: Departamento[]) => {
@@ -61,7 +68,6 @@ export class ReservaPage {
       .then((value: Sala[]) => {
         this.rooms = value;
         this.selectedRoom = this.rooms[0];
-        console.log(this.selectedRoom);
       });
 
     await this.reservaService.loadReservationToday(this.today, this.selectedDepartament)
@@ -73,6 +79,10 @@ export class ReservaPage {
     if(this.login.id !== -1) {
       this.menuCtrl.enable(true);
     }
+  }
+
+  chamaLogin() {
+    this.navCtrl.push("LoginPage");
   }
 
   refreshReservation() {

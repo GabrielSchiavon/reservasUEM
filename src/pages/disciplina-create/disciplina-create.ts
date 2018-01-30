@@ -6,7 +6,7 @@ import { Departamento } from './../../models/Departamento';
 import { Login } from './../../models/Login';
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, MenuController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -25,7 +25,8 @@ export class DisciplinaCreatePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private toastCtrl: ToastController,
-    private disciplinaProvider: DisciplinaServiceProvider
+    private disciplinaProvider: DisciplinaServiceProvider,
+    private menuCtrl: MenuController
   ) {
     this.disciplina = this.navParams.get("disciplina") || new Disciplina();
     this.departamentos = this.navParams.get("departamentos") || [];
@@ -33,6 +34,14 @@ export class DisciplinaCreatePage {
     this.isCadastro = this.navParams.get("isCadastro") || false;
     this.login = this.navParams.get("login");
   }
+
+  ionViewCanEnter(){
+    this.menuCtrl.enable(false);
+   }
+ 
+   ionViewCanLeave(){
+    this.menuCtrl.enable(true);
+   }
 
   exibirMensagem(mensagem: string) {
     let toast = this.toastCtrl.create({

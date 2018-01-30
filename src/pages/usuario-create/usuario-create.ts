@@ -5,7 +5,7 @@ import { Departamento } from '../../models/Departamento';
 import { Encapsular } from '../../models/Encapsular';
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 @IonicPage()
@@ -24,13 +24,22 @@ export class UsuarioCreatePage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private usuarioProvider: UsuarioServiceProvider,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private menuCtrl: MenuController
   ) {
     this.departamentos = this.navParams.get("departamentos") || [];
     this.usuario = this.navParams.get("usuario") || new Usuario();
     this.isCadastro = this.navParams.get("isCadastro") || false;
     this.login = this.navParams.get("login") || new Login();
   }
+
+  ionViewCanEnter(){
+    this.menuCtrl.enable(false);
+   }
+ 
+   ionViewCanLeave(){
+    this.menuCtrl.enable(true);
+   } 
 
   verificarProblemaLocomocao(ev) {
     if (ev.isChecked) {

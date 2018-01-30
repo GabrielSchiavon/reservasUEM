@@ -26,8 +26,7 @@ export class ReservaListagemPage {
         (data: ReservaUsuario[]) => {
           this.reservaConfirmadas = data.filter( reserva => reserva.status == 2 );
           this.reservaPendentes = data.filter( reserva => reserva.status == 1 ); 
-          this.reservaFinalizadas = data.filter( reserva => reserva.status <= 0 ); 
-          console.log(this.reservaPendentes); 
+          this.reservaFinalizadas = data.filter( reserva => reserva.status <= 0 );
         },
         (error) => console.log(error) );
   }

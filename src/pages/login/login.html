@@ -19,7 +19,7 @@
   
       <ion-item class="check" no-lines>
         <ion-label>Mantenha-me conectado</ion-label>
-        <ion-checkbox [(ngModel)]="keepConnected" (ionChange)="saveConnected()"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="keepConnected" (ionChange)="saveConnected($event)"></ion-checkbox>
       </ion-item>
     </ion-list>
 

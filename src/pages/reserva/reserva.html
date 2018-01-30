@@ -1,10 +1,13 @@
 <ion-header>
 
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle *ngIf="login.id !== -1">
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Reservas</ion-title>
+    <ion-buttons right>
+      <button ion-button outline (click)="chamaLogin()" *ngIf="login.id === -1">Login</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -13,17 +16,24 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-icon item-start name="calendar"></ion-icon>
+      <ion-icon item-start name="pricetag"></ion-icon>
       <ion-label>Departamento</ion-label>
-      <ion-select [(ngModel)]="selectedDepartament" (ngModelChange)="refreshReservation()">
+      <ion-select [(ngModel)]="selectedDepartament" (ngModelChange)="refreshReservation()" okText="Selecionar" cancelText="Cancelar">
         <ion-option *ngFor="let d of departaments" value="{{ d.id }}"> {{ d.nome }}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-icon item-start name="clock"></ion-icon>
+      <ion-icon item-start name="calendar"></ion-icon>
       <ion-label>Data</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD-MM-YYYY" [(ngModel)]="today" (ngModelChange)="refreshReservation()"></ion-datetime>>
+      <ion-datetime 
+        displayFormat="DD/MM/YYYY"
+        pickerFormat="DD-MM-YYYY"
+        [(ngModel)]="today"
+        (ngModelChange)="refreshReservation()"
+        doneText="Selecionar"
+        cancelText="Cancelar">
+      </ion-datetime>>
     </ion-item>
   </ion-list>
 

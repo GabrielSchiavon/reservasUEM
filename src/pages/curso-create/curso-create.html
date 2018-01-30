@@ -21,7 +21,7 @@
 
   <ion-item>
     <ion-label floating>Departamento</ion-label>
-    <ion-select [(ngModel)]="curso.IdDepartamento" okText="Selecionar" cancelText="Cancelar">
+    <ion-select [(ngModel)]="curso.id_departamento" okText="Selecionar" cancelText="Cancelar">
       <ion-option *ngFor="let d of departamentos" value="{{ d.id }}"> {{ d.nome }} </ion-option>
     </ion-select>
   </ion-item>

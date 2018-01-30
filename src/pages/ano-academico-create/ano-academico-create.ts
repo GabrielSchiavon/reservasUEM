@@ -3,7 +3,7 @@ import { AnoLetivo } from './../../models/AnoLetivo';
 import { Departamento } from './../../models/Departamento';
 import { Login } from './../../models/Login';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, MenuController } from 'ionic-angular';
 import { Encapsular } from '../../models/Encapsular';
 
 @IonicPage()
@@ -22,7 +22,8 @@ export class AnoAcademicoCreatePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private toastCtrl: ToastController,
-    private anoLetivoProvider: AnoLetivoServiceProvider
+    private anoLetivoProvider: AnoLetivoServiceProvider,
+    private menuCtrl: MenuController
   ) {
     this.isCadastro = this.navParams.get("isCadastro") || false;
     this.login = this.navParams.get("login") || new Login();
@@ -30,6 +31,14 @@ export class AnoAcademicoCreatePage {
     this.anoLetivo = this.navParams.get("anoLetivo") || new AnoLetivo();
   }
   
+  ionViewCanEnter(){
+   this.menuCtrl.enable(false);
+  }
+
+  ionViewCanLeave(){
+   this.menuCtrl.enable(true);
+  }
+
   exibirMensagem(mensagem: string) {
     let toast = this.toastCtrl.create({
       message: mensagem,

@@ -8,7 +8,7 @@ import { UsuarioServiceProvider } from './../../providers/usuario-service/usuari
 import { Usuario } from './../../models/Usuario';
 import { Reserva } from './../../models/Reserva';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, MenuController } from 'ionic-angular';
 import { ReservaServiceProvider } from '../../providers/reserva-service/reserva-service';
 import { SalaServiceProvider } from '../../providers/sala-service/sala-service';
 import { Encapsular } from '../../models/Encapsular';
@@ -33,10 +33,15 @@ export class ReservationCreatePage {
   departaments: Departamento[];
   rooms: Sala[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private userProvider: UsuarioServiceProvider, private departamentProvider: DepartamentoServiceProvider,
-    private reservationProvider: ReservaServiceProvider, private disciplineProvider: DisciplinaServiceProvider,
-    private roomProvider: SalaServiceProvider, private toastCtrl: ToastController
+  constructor(
+    public navCtrl: NavController, public navParams: NavParams,
+    private userProvider: UsuarioServiceProvider,
+    private departamentProvider: DepartamentoServiceProvider,
+    private reservationProvider: ReservaServiceProvider,
+    private disciplineProvider: DisciplinaServiceProvider,
+    private roomProvider: SalaServiceProvider,
+    private toastCtrl: ToastController,
+    private menuCtrl: MenuController
   ) {
     this.reservation = this.navParams.get("reservation") || new Reserva();
     this.today = new Date().toISOString();
@@ -44,6 +49,14 @@ export class ReservationCreatePage {
     //this.login = this.navParams.get("login"); //<-- Substituir para login
     this.linkRelationship();
   }
+
+  ionViewCanEnter(){
+    this.menuCtrl.enable(false);
+   }
+ 
+   ionViewCanLeave(){
+    this.menuCtrl.enable(true);
+   } 
 
   public async linkRelationship() {
     await this.callLoadUser();
@@ -111,7 +124,17 @@ export class ReservationCreatePage {
     }
   }
 
+  mudaTipoSala() {
+    console.log(this.rooms)
+    let sala = this.rooms.filter( (room) => room.id == this.reservation.idsala);
+    console.log(sala);
+    if (sala.length === 1) {
+      this.reservation.tiposala = sala[0].classificacao;
+    }
+  }
+
   save() {
+    this.reservation.idusuario = this.login.id;
     let encapsulate = new Encapsular(JSON.stringify(this.login), JSON.stringify(this.reservation), "");
     console.log(JSON.stringify(encapsulate));
     this.reservationProvider.insertReservation(encapsulate)

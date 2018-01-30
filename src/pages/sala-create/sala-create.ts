@@ -2,7 +2,7 @@ import { Sala } from './../../models/Sala';
 import { Departamento } from './../../models/Departamento';
 import { Login } from './../../models/Login';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, MenuController } from 'ionic-angular';
 import { SalaServiceProvider } from '../../providers/sala-service/sala-service';
 import { Encapsular } from '../../models/Encapsular';
 
@@ -22,13 +22,22 @@ export class SalaCreatePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private toastCtrl: ToastController,
-    private salaProvider: SalaServiceProvider
+    private salaProvider: SalaServiceProvider,
+    private menuCtrl: MenuController
   ) {
     this.isCadastro = this.navParams.get("isCadastro") || false;
     this.login = this.navParams.get("login") || new Login();
     this.departamentos = this.navParams.get("departamentos") || new Departamento();
     this.sala = this.navParams.get("sala") || new Sala();
   }
+
+  ionViewCanEnter(){
+    this.menuCtrl.enable(false);
+   }
+ 
+   ionViewCanLeave(){
+    this.menuCtrl.enable(true);
+   } 
 
   exibirMensagem(mensagem: string) {
     let toast = this.toastCtrl.create({
